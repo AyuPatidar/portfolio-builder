@@ -3,7 +3,7 @@ import { Tangerine } from "next/font/google";
 import ThemeButton from "@/components/custom/ThemeButton";
 import Image from "next/image";
 import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import AuthButton from "@/components/custom/AuthButton";
 
 export const tangerine = Tangerine({
 	weight: ["700"],
@@ -37,7 +37,7 @@ export default function Home() {
 							</li>
 						))}
 					</ul>
-					<Button></Button>
+					<AuthButton />
 				</div>
 				<Image
 					src={"/portfolio.svg"}

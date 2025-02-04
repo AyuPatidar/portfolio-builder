@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./globals.css";
+import SessionProvider from "@/components/custom/SessionProvider";
 
 export const ubuntu = Ubuntu({
 	subsets: ["cyrillic"],
@@ -20,7 +21,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${ubuntu.className}`}>{children}</body>
+			<body className={`${ubuntu.className}`}>
+				<SessionProvider>{children}</SessionProvider>
+			</body>
 		</html>
 	);
 }
