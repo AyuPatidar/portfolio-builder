@@ -8,7 +8,7 @@ export const ubuntu = Ubuntu({
 });
 
 export const metadata: Metadata = {
-	title: "Create Your Stunning Portfolio in Minutes – Simple Form-Based Design",
+	title: "Portfolio",
 	description:
 		"Showcase your portfolio effortlessly with our intuitive platform. Complete a few easy forms and let the app automatically handle the professional design tailored to your work.",
 };
