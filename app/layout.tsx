@@ -1,14 +1,10 @@
 import type { Metadata } from "next";
-import { Tangerine, Inter } from "next/font/google";
+import { Ubuntu } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
-	subsets: ["latin"],
-});
-
-const tangerine = Tangerine({
-	weight: ["400", "700"],
-	subsets: ["latin"],
+export const ubuntu = Ubuntu({
+	subsets: ["cyrillic"],
+	weight: ["300"],
 });
 
 export const metadata: Metadata = {
@@ -24,9 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.className} ${tangerine.className}`}>
-				{children}
-			</body>
+			<body className={`${ubuntu.className}`}>{children}</body>
 		</html>
 	);
 }
