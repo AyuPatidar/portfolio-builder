@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${ubuntu.className}`}>
+			<body className={`${ubuntu.className} transition-colors duration-1000`}>
 				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>

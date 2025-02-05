@@ -86,6 +86,7 @@ export default function Home() {
 						alt={"portfolio website"}
 						width={400}
 						height={400}
+						loading="lazy"
 					/>
 				</motion.div>
 			</main>
