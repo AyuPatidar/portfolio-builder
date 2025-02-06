@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import { Ubuntu } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import SessionProvider from "@/components/custom/SessionProvider";
 
-export const ubuntu = Ubuntu({
-	subsets: ["cyrillic"],
-	weight: ["300"],
+export const inter = Inter({
+	subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -21,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${ubuntu.className} transition-colors duration-1000`}>
+			<body className={`${inter.className} transition-colors duration-1000`}>
 				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>
