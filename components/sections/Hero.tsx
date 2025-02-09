@@ -22,7 +22,9 @@ const Hero = () => {
 						</span>
 					</h1>
 					<p className="text-xl md:text-2xl mb-8 text-muted-foreground">
-						Full Stack Developer crafting modern web experiences
+						A Software Engineer
+						<br />
+						A Full Stack Developer
 					</p>
 					<div className="flex gap-4">
 						<Button

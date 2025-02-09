@@ -65,45 +65,46 @@ const Navbar = () => {
 						</div>
 					</Link>
 
-					{/* Desktop Menu */}
-					<nav className="hidden md:flex items-center gap-8">
-						{navLinks.map(link => (
+					<div className="flex items-center gap-2 lg:gap-6">
+						{/* Desktop Menu */}
+						<nav className="hidden lg:flex items-center gap-6">
+							{navLinks.map(link => (
+								<Link
+									href={link.href}
+									key={link.href}
+									className={`font-medium text-muted-foreground hover:text-primary`}
+								>
+									{link.name}
+								</Link>
+							))}
 							<Link
-								href={link.href}
-								key={link.href}
-								className={`font-medium text-muted-foreground hover:text-primary`}
+								href={"/Resume.pdf"}
+								download={"AyushPatidar"}
+								target="_blank"
 							>
-								{link.name}
+								<Button
+									variant={"default"}
+									size={"sm"}
+									className="gap-2 transition-colors duration-1000 text-sm [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
+								>
+									<Download />
+									Resume
+								</Button>
 							</Link>
-						))}
-						<Link
-							href={"/Resume.pdf"}
-							download={"AyushPatidar"}
-							target="_blank"
+						</nav>
+						{/* Mobile Menu */}
+						<Button
+							variant={"ghost"}
+							size={"icon"}
+							className="lg:hidden [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0"
+							onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 						>
-							<Button
-								variant={"default"}
-								size={"sm"}
-								className="gap-2 transition-colors duration-1000 text-sm [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
-							>
-								<Download />
-								Resume
-							</Button>
-						</Link>
-						<div className="hidden sm:flex">
+							{isMobileMenuOpen ? <X /> : <Menu />}
+						</Button>
+						<div>
 							<ThemeButton />
 						</div>
-					</nav>
-
-					{/* Mobile Menu */}
-					<Button
-						variant={"ghost"}
-						size={"icon"}
-						className="md:hidden [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
-						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-					>
-						{isMobileMenuOpen ? <X /> : <Menu />}
-					</Button>
+					</div>
 				</div>
 			</div>
 
@@ -115,7 +116,7 @@ const Navbar = () => {
 						animate={{ opacity: 1, y: 0, height: "auto", scaleY: 1 }}
 						exit={{ opacity: 0, y: 20, height: 0, scaleY: 0.5 }}
 						transition={{ duration: 0.5 }}
-						className="md:hidden border-t bg-background transition-colors duration-1000"
+						className="lg:hidden border-t bg-background transition-colors duration-1000"
 					>
 						<nav className="container mx-auto p-4 flex flex-col gap-4">
 							{navLinks.map(link => (
