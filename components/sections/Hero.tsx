@@ -16,20 +16,16 @@ const Hero = () => {
 					transition={{ duration: 0.5 }}
 				>
 					<h1 className="text-4xl md:text-6xl font-bold mb-6">
-						Hi, I'm{" "}
-						<span className={`text-primary`}>
-							Ayush Patidar
-						</span>
+						Hi, I'm <span className={`text-primary`}>Ayush Patidar</span>
 					</h1>
 					<p className="text-xl md:text-2xl mb-8 text-muted-foreground">
 						A Software Engineer
-						<br />
-						A Full Stack Developer
+						<br />A Full Stack Developer
 					</p>
 					<div className="flex gap-4">
 						<Button
 							variant={"default"}
-							className="gap-2"
+							className="gap-2 theme-transition"
 						>
 							<Mail className="w-4 h-4" />
 							Contact Me
