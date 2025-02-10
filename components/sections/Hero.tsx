@@ -26,7 +26,7 @@ const Hero = () => {
 						<Button
 							variant={"default"}
 							size={"lg"}
-							className="gap-2 theme-transition [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+							className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 						>
 							<Mail />
 							Contact Me
@@ -37,7 +37,8 @@ const Hero = () => {
 						>
 							<Button
 								variant={"outline"}
-								className="gap-2 theme-transition [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+								size={"lg"}
+								className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 							>
 								<Github />
 								Github

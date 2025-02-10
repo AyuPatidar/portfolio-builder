@@ -16,11 +16,11 @@ const AuthButton: React.FC = () => {
 		<div className="flex justify-center space-x-2">
 			<Button
 				onClick={handleSignOut}
-				className="w-full text-lg theme-transition font-semibold [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+				className="w-full text-lg [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 			>
 				Sign out <LogOut />
 			</Button>
-			<Button className="w-full text-lg font-bold theme-transition">
+			<Button className="w-full text-lg">
 				<Link href={`/${session.user?.email?.split("@")[0]}`}>
 					To Portfolio
 				</Link>
@@ -29,7 +29,7 @@ const AuthButton: React.FC = () => {
 	) : (
 		<Button
 			onClick={handleSignIn}
-			className="w-full text-lg theme-transition font-semibold [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+			className="w-full text-lg [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 		>
 			Sign in with Google <LogIn />
 		</Button>

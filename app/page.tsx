@@ -32,7 +32,7 @@ export default function Home() {
 					className="mx-auto h-full flex flex-col justify-center space-y-8"
 				>
 					<div className="space-y-2">
-						<h1 className="text-2xl md:text-3xl font-bold">
+						<h1 className="text-2xl md:text-3xl font-semibold">
 							{name ? (
 								<span>
 									Welcome{" "}
