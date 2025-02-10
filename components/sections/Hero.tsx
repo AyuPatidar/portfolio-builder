@@ -25,6 +25,7 @@ const Hero = () => {
 					<div className="flex gap-4">
 						<Button
 							variant={"default"}
+							size={"lg"}
 							className="gap-2 theme-transition"
 						>
 							<Mail className="w-4 h-4" />
