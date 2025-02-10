@@ -26,9 +26,9 @@ const Hero = () => {
 						<Button
 							variant={"default"}
 							size={"lg"}
-							className="gap-2 theme-transition"
+							className="gap-2 theme-transition [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 						>
-							<Mail className="w-4 h-4" />
+							<Mail />
 							Contact Me
 						</Button>
 						<Link
