@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<body className={`${inter.className} transition-colors duration-1000`}>
+			<body className={`${inter.className} theme-transition`}>
 				<SessionProvider>{children}</SessionProvider>
 			</body>
 		</html>
