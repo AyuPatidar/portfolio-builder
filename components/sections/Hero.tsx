@@ -23,14 +23,16 @@ const Hero = () => {
 						<br />A Full Stack Developer
 					</p>
 					<div className="flex gap-4">
-						<Button
-							variant={"default"}
-							size={"lg"}
-							className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
-						>
-							<Mail />
-							Contact Me
-						</Button>
+						<Link href={"mailto:ayushpatidar755@gmail.com"}>
+							<Button
+								variant={"default"}
+								size={"lg"}
+								className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+							>
+								<Mail />
+								Contact Me
+							</Button>
+						</Link>
 						<Link
 							href={"https://github.com/AyuPatidar"}
 							target="_blank"

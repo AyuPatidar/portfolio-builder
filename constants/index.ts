@@ -1,0 +1,17 @@
+export const technologies = [
+	{ name: "C++", logo: "/techs/cpp.svg" },
+	{ name: "Next", logo: "/techs/nextjs.svg" },
+	{ name: "React", logo: "/techs/reactjs.svg" },
+	{ name: "TypeScript", logo: "/techs/ts.svg" },
+	{ name: "Node", logo: "/techs/nodejs.svg" },
+	{ name: "MongoDB", logo: "/techs/mongodb.svg" },
+	{ name: "Express", logo: "/techs/express.svg" },
+	{ name: "Tailwind CSS", logo: "/techs/tailwind.svg" },
+	{ name: "HTML5", logo: "/techs/html5.svg" },
+	{ name: "CSS3", logo: "/techs/css3.svg" },
+	{ name: "Redux Toolkit", logo: "/techs/redux.svg" },
+	{ name: "Flutter", logo: "/techs/flutter.svg" },
+	{ name: "Dart", logo: "/techs/dart.svg" },
+	{ name: "Firebase", logo: "/techs/firebase.svg" },
+	{ name: "Git", logo: "/techs/git.svg" },
+];
