@@ -1,4 +1,5 @@
 "use client";
+import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
 import Skills from "@/components/sections/Skills";
 import { useParams } from "next/navigation";
@@ -10,6 +11,7 @@ const page = () => {
 		<div>
 			<Hero />
 			<Skills />
+			<Experience />
 		</div>
 	);
 };
