@@ -8,6 +8,7 @@ import { tangerine } from "@/app/page";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { Download, Menu, X } from "lucide-react";
+import { Skeleton } from "../ui/skeleton";
 
 const Navbar = () => {
 	const { data: session } = useSession();
@@ -54,7 +55,7 @@ const Navbar = () => {
 										loading="lazy"
 									/>
 								) : (
-									<div className="w-10 h-10 rounded-full bg-secondary"></div>
+									<Skeleton className="w-10 h-10 rounded-full bg-secondary" />
 								)}
 							</div>
 							<h1

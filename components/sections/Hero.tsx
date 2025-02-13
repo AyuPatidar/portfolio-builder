@@ -22,12 +22,12 @@ const Hero = () => {
 						A Software Engineer
 						<br />A Full Stack Developer
 					</p>
-					<div className="flex gap-4">
+					<div className="flex flex-col md:flex-row gap-4">
 						<Link href={"mailto:ayushpatidar755@gmail.com"}>
 							<Button
 								variant={"default"}
 								size={"lg"}
-								className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+								className="w-full sm:w-1/2 md:w-fit gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 							>
 								<Mail />
 								Contact Me
@@ -40,7 +40,7 @@ const Hero = () => {
 							<Button
 								variant={"outline"}
 								size={"lg"}
-								className="gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
+								className="w-full sm:w-1/2 md:w-fit gap-2 [&_svg]:pointer-events-none [&_svg]:size-5 [&_svg]:shrink-0"
 							>
 								<Github />
 								Github

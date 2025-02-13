@@ -22,8 +22,16 @@ export const experience = [
 		jobDesignation: "Software Engineer",
 		location: "Remote",
 		period: "Jan 2024 - Dec 2024",
-		skills:
-			"React (class based and functional components), Material UI, Typescript, CSS, RTL, Enzyme, Jest",
+		skills: [
+			"Git",
+			"React",
+			"Material UI",
+			"Typescript",
+			"CSS",
+			"RTL",
+			"Enzyme",
+			"Jest",
+		],
 		responsibilities: [
 			"Developed and maintained dynamic, user-focused front-end solutions for full-stack web applications prioritizing scalability, maintainability, and high performance.",
 			"Implemented advanced features, including custom forms with Formik and Yup, and integrated third-party services like Zoom SDKs and DocuSign to deliver seamless cross-platform user experiences.",
@@ -36,8 +44,16 @@ export const experience = [
 		jobDesignation: "Software Engineer Intern",
 		location: "Remote",
 		period: "July 2023 - Dec 2023",
-		skills:
-			"Git, React (class based and functional components), Material UI, Typescript, CSS, RTL, Enzyme, Jest",
+		skills: [
+			"Git",
+			"React",
+			"Material UI",
+			"Typescript",
+			"CSS",
+			"RTL",
+			"Enzyme",
+			"Jest",
+		],
 		responsibilities: [
 			"Developed and maintained web applications using React.js, TypeScript, and Material-UI (MUI), focusing on building scalable, user-friendly, and responsive UI components.",
 			"Implemented unit tests using the Jest testing framework, ensuring the reliability and stability of features and applications.",
@@ -50,7 +66,7 @@ export const experience = [
 		jobDesignation: "App Developer Intern",
 		location: "Remote",
 		period: "Jan 2021 - May 2021",
-		skills: "Git, Flutter, Dart, Firebase",
+		skills: ["Git", "Flutter", "Dart", "Firebase"],
 		responsibilities: [
 			"Developed the Llokality app from the ground up using Flutter and Dart, creating a seamless and responsive user experience across multiple platforms.",
 			"Utilized Flutter and Dart to design and implement the app’s user interface and core functionality, ensuring smooth performance and a modern, intuitive layout.",
