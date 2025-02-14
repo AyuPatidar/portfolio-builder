@@ -1,4 +1,5 @@
 "use client";
+import Education from "@/components/sections/Education";
 import Experience from "@/components/sections/Experience";
 import Hero from "@/components/sections/Hero";
 import Skills from "@/components/sections/Skills";
@@ -12,6 +13,7 @@ const page = () => {
 			<Hero />
 			<Skills />
 			<Experience />
+			<Education />
 		</div>
 	);
 };

@@ -74,3 +74,25 @@ export const experience = [
 		],
 	},
 ];
+
+export const education = [
+	{
+		institute: "IET-DAVV",
+		cgpa: "8.3",
+		period: "2020 - 2024",
+		degree: "B.E. Computer Science",
+		coursework: ["DSA", "DBMS", "OS"],
+	},
+	{
+		institute: "CCSSS",
+		cgpa: "9.1",
+		period: "2018 - 2019",
+		grade: "12th",
+	},
+	{
+		institute: "CCSSS",
+		cgpa: "9.6",
+		period: "2016 - 2017",
+		grade: "10th",
+	},
+];
