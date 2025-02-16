@@ -1,5 +1,8 @@
 import { education } from "@/constants";
 import React from "react";
+import { motion } from "framer-motion";
+import { GraduationCap, Landmark } from "lucide-react";
+import { Card } from "../ui/card";
 
 const Education = () => {
 	return (
@@ -10,38 +13,84 @@ const Education = () => {
 			<h2 className="text-3xl font-bold mb-12 text-center">
 				<span className="text-primary">Education</span>
 			</h2>
-			<div>
+			<ol className={"flex flex-col relative w-full mx-auto py-8 gap-4"}>
 				{education.map((ed, index) => (
-					<div key={index}>
-						<br />
-						Institute: {ed.institute}
-						{ed.degree && <br />}
-						{ed.degree && "Degree: " + ed.degree}
-						<br />
-						CGPA: {ed.cgpa}
-						<br />
-						Period: {ed.period}
-						<br />
-						{ed.coursework && "Coursework: "}
-						{ed.coursework && (
-							<>
-								{ed.coursework.map((cw, index) => (
-									<div
-										key={index}
-										className="inline"
+					<motion.div
+						key={index}
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{
+							duration: 0.5,
+							delay: index * 0.1,
+							ease: "easeOut",
+						}}
+					>
+						<li className={"relative w-full mb-8 last:mb-0"}>
+							<div className="grid grid-cols-[auto_auto_1fr] gap-4 items-start">
+								{/* Period */}
+								<div className="flex justify-end items-center pt-2">
+									<p
+										className={
+											"text-sm font-medium tracking-tight text-secondary-foreground"
+										}
 									>
-										{index != 0 && ", "}
-										{cw}
+										{ed.period}
+									</p>
+								</div>
+
+								{/* Timeline dot and connector */}
+								<div className="flex h-full flex-col items-center">
+									<div className="relative z-10">
+										<div
+											className={
+												"relative flex items-center justify-center rounded-full ring-8 ring-background shadow-sm h-12 w-12 bg-primary text-primary-foreground"
+											}
+										>
+											<div
+												className={"flex items-center justify-center h-6 w-6"}
+											>
+												{ed.college ? <GraduationCap /> : <Landmark />}
+											</div>
+										</div>
 									</div>
-								))}
-								<br />
-							</>
-						)}
-						{ed.grade && "Grade: " + ed.grade}
-						<br />
-					</div>
+									{index !== education.length - 1 && (
+										<div className="min-h-12 h-full w-0.5 mt-2 bg-primary" />
+									)}
+								</div>
+
+								{/* Card */}
+								<Card>
+									<div className={"flex flex-col gap-2"}>
+										<div className={"flex flex-col"}>
+											<h3
+												className={
+													"font-semibold text-lg leading-none text-secondary-foreground"
+												}
+											>
+												{ed.school || ed.college}
+											</h3>
+											<p>{ed.degree || ed.grade}</p>
+										</div>
+										<div>
+											<p className="text-sm">CGPA: {ed.cgpa}</p>
+											<p className="text-sm">
+												{ed.coursework && "Coursework: "}
+												{ed.coursework &&
+													ed.coursework.map((cw, index) => (
+														<span key={index}>
+															{index != 0 && ", "}
+															{cw}
+														</span>
+													))}
+											</p>
+										</div>
+									</div>
+								</Card>
+							</div>
+						</li>
+					</motion.div>
 				))}
-			</div>
+			</ol>
 		</section>
 	);
 };
