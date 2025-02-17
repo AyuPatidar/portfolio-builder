@@ -75,6 +75,32 @@ export const experience = [
 	},
 ];
 
+export const projects = [
+	{
+		title: "Portfolio Builder",
+		description: "Tool to build portfolio",
+		image: "/challenger.jpg",
+		liveUrl: "",
+		githubUrl: "",
+		technologies: ["Nextjs", "Reactjs"],
+		features: [
+			"Something",
+			"A good feature",
+			"Awesome",
+			"Ah, shit! Here we go again.",
+		],
+	},
+	{
+		title: "Secret Space",
+		description: "Write your digital diary",
+		image: "/challenger.jpg",
+		liveUrl: "",
+		githubUrl: "",
+		technologies: ["Nextjs", "Reactjs"],
+		features: [],
+	},
+];
+
 export const education = [
 	{
 		college: "IET-DAVV",
