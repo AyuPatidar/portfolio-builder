@@ -5,6 +5,26 @@ const octokit = new Octokit({
 	auth: process.env.GITHUB_TOKEN,
 });
 
+interface IGitStats {
+	user: {
+		contributionsCollection: {
+			contributionCalendar: {
+				totalContributions: number;
+				weeks?: WeeksEntity[] | null;
+			};
+		};
+	};
+}
+interface WeeksEntity {
+	contributionDays?: ContributionDaysEntity[] | null;
+}
+interface ContributionDaysEntity {
+	color: string;
+	contributionCount: number;
+	weekday: number;
+	date: string;
+}
+
 export async function GET(req: NextRequest) {
 	const { searchParams } = req.nextUrl;
 	const username = searchParams.get("username");
@@ -32,8 +52,12 @@ export async function GET(req: NextRequest) {
                       }
                     }
                   }`;
-		const response = await octokit.graphql(query, { username });
-		return NextResponse.json({ response });
+
+		const response: IGitStats = await octokit.graphql(query, { username });
+
+		const { contributionCalendar } = response.user.contributionsCollection;
+
+		return NextResponse.json({ contributionCalendar });
 	} catch (error) {
 		console.error("Fetch Github contributions Error: ", error);
 		return NextResponse.json(

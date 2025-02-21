@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Provider = ({ children, session }: Props) => {
-	console.log(session, "ye dekho", children);
+	// console.log(session, "ye dekho", children);
 	return <SessionProvider session={session}>{children}</SessionProvider>;
 };
 
