@@ -9,11 +9,16 @@ interface IGitStats {
 	user: {
 		contributionsCollection: {
 			contributionCalendar: {
+				months?: MonthsEntity[] | null;
 				totalContributions: number;
 				weeks?: WeeksEntity[] | null;
 			};
 		};
 	};
+}
+interface MonthsEntity {
+	totalWeeks: number;
+	name: string;
 }
 interface WeeksEntity {
 	contributionDays?: ContributionDaysEntity[] | null;
@@ -36,22 +41,26 @@ export async function GET(req: NextRequest) {
 		);
 	try {
 		const query = `query ($username: String!) {
-                    user(login: $username) {
-                      contributionsCollection {
-                        contributionCalendar {
-                          totalContributions
-                          weeks {
-                            contributionDays {
-                              color
-                              contributionCount
-                              weekday
-                              date
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }`;
+			user(login: $username) {
+				contributionsCollection {
+					contributionCalendar {
+						months{
+							totalWeeks
+							name
+						}
+						totalContributions
+						weeks {
+							contributionDays {
+								color
+								contributionCount
+								weekday
+								date
+							}
+						}
+					}
+				}
+			}
+		}`;
 
 		const response: IGitStats = await octokit.graphql(query, { username });
 
