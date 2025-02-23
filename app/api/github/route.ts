@@ -44,14 +44,10 @@ export async function GET(req: NextRequest) {
 			user(login: $username) {
 				contributionsCollection {
 					contributionCalendar {
-						months{
-							totalWeeks
-							name
-						}
 						totalContributions
 						weeks {
 							contributionDays {
-								color
+								contributionLevel
 								contributionCount
 								weekday
 								date
@@ -64,9 +60,13 @@ export async function GET(req: NextRequest) {
 
 		const response: IGitStats = await octokit.graphql(query, { username });
 
-		const { contributionCalendar } = response.user.contributionsCollection;
+		const { totalContributions, weeks } =
+			response.user.contributionsCollection.contributionCalendar;
 
-		return NextResponse.json({ contributionCalendar });
+		return NextResponse.json({
+			totalContributions: totalContributions,
+			weeks: weeks,
+		});
 	} catch (error) {
 		console.error("Fetch Github contributions Error: ", error);
 		return NextResponse.json(
