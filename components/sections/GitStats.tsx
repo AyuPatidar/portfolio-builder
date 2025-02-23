@@ -49,10 +49,18 @@ const GitStats = () => {
 		if (contributionLevel === "SECOND_QUARTILE") return "bg-[#40c463]";
 		if (contributionLevel === "THIRD_QUARTILE") return "bg-[#30a14e]";
 		if (contributionLevel === "FOURTH_QUARTILE") return "bg-[#216e39]";
-		return "[#ebedf0]";
+		return "bg-[#ebedf0]";
 	};
 
-	if (loading) return <Skeleton className="w-full h-[100]"></Skeleton>;
+	if (loading)
+		return (
+			<section
+				id="activity"
+				className="container mx-auto px-4 py-8 md:py-20"
+			>
+				<Skeleton className="w-full h-[100]"></Skeleton>
+			</section>
+		);
 
 	if (error)
 		return (
