@@ -5,6 +5,12 @@ import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { Card } from "../ui/card";
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger,
+} from "../ui/tooltip";
 
 interface Week {
 	weekStartDate: string;
@@ -95,45 +101,74 @@ const GitStats = () => {
 						</div>
 						{gitStats.totalContributions} contributions in the last year
 					</div>
-					<ScrollArea className="rounded-lg">
-						<div className={`flex justify-between bg-secondary/60 p-4 gap-[8]`}>
-							{gitStats.months?.map((month, monthIndex) => (
-								<div
-									key={monthIndex}
-									className="space-y-1"
-								>
-									<div className="flex gap-[2]">
-										{month.weeks.map((week, weekIndex) => (
-											<div
-												key={weekIndex}
-												className={`flex flex-col gap-[2] ${
-													week.weekStartDate === week.contributionDays[0].date
-														? "justify-start"
-														: "justify-end"
-												}`}
-											>
-												{week.contributionDays.map((day, dayIndex) => (
-													<div
-														key={dayIndex}
-														className={cn(
-															"w-[10] h-[10] rounded-[3]",
-															getContributionLevel(day.contributionLevel)
-														)}
-													></div>
-												))}
-											</div>
-										))}
+					<div className="bg-secondary/60 p-3 w-full rounded-lg">
+						<ScrollArea className="rounded-lg">
+							<div className={`flex justify-between gap-[8] py-1`}>
+								{gitStats.months?.map((month, monthIndex) => (
+									<div
+										key={monthIndex}
+										className="space-y-1"
+									>
+										<div className="flex gap-[2]">
+											{month.weeks.map((week, weekIndex) => (
+												<div
+													key={weekIndex}
+													className={`flex flex-col gap-[2] ${
+														week.weekStartDate === week.contributionDays[0].date
+															? "justify-start"
+															: "justify-end"
+													}`}
+												>
+													{week.contributionDays.map((day, dayIndex) => (
+														<TooltipProvider
+															key={dayIndex}
+															delayDuration={0}
+														>
+															<Tooltip>
+																<TooltipTrigger>
+																	<div
+																		className={cn(
+																			"w-[10] h-[10] rounded-[3]",
+																			getContributionLevel(
+																				day.contributionLevel
+																			)
+																		)}
+																	></div>
+																</TooltipTrigger>
+																<TooltipContent className="bg-secondary-foreground text-secondary">
+																	{day.contributionCount > 0
+																		? day.contributionCount
+																		: "No"}{" "}
+																	{day.contributionCount === 1
+																		? "contribution"
+																		: "contributions"}{" "}
+																	on{" "}
+																	{new Date(day.date).toLocaleString(
+																		"default",
+																		{
+																			day: "numeric",
+																			month: "long",
+																			year: "numeric",
+																		}
+																	)}
+																</TooltipContent>
+															</Tooltip>
+														</TooltipProvider>
+													))}
+												</div>
+											))}
+										</div>
+										{month.weeks.length > 2 && (
+											<p className="text-center text-sm font-light">
+												{month.month.slice(0, 3)}
+											</p>
+										)}
 									</div>
-									{month.weeks.length > 2 && (
-										<p className="text-center text-sm font-light">
-											{month.month.slice(0, 3)}
-										</p>
-									)}
-								</div>
-							))}
-						</div>
-						<ScrollBar orientation="horizontal" />
-					</ScrollArea>
+								))}
+							</div>
+							<ScrollBar orientation="horizontal" />
+						</ScrollArea>
+					</div>
 				</div>
 			</div>
 		</section>
