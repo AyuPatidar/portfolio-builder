@@ -6,9 +6,13 @@ import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { Card } from "../ui/card";
 
+interface MonthEntity {
+	month: string;
+	contributionDays: ContributionDaysEntity[];
+}
 export interface IContributionCalendar {
 	totalContributions: number;
-	weeks?: WeeksEntity[] | null;
+	months?: MonthEntity[] | null;
 }
 export interface WeeksEntity {
 	contributionDays?: ContributionDaysEntity[] | null;
@@ -90,7 +94,7 @@ const GitStats = () => {
 						</div>
 						<ScrollArea className="rounded-md">
 							<div className={`flex justify-center bg-accent p-4 gap-2`}>
-								{gitStats.weeks?.map((week, weekIndex: number) => (
+								{/* {gitStats.weeks?.map((week, weekIndex: number) => (
 									<div
 										key={weekIndex}
 										className="flex flex-col"
@@ -115,8 +119,9 @@ const GitStats = () => {
 													></div>
 												))}
 										</div>
+										{}
 									</div>
-								))}
+								))} */}
 							</div>
 							<ScrollBar orientation="horizontal" />
 						</ScrollArea>
