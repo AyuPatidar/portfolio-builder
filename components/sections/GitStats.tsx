@@ -101,9 +101,9 @@ const GitStats = () => {
 						</div>
 						{gitStats.totalContributions} contributions in the last year
 					</div>
-					<div className="bg-secondary/60 p-3 w-full rounded-lg">
+					<div className="bg-secondary/60 py-3 px-6 w-full rounded-lg">
 						<ScrollArea className="rounded-lg">
-							<div className={`flex justify-between gap-[8] py-1`}>
+							<div className={`flex justify-between gap-[8] py-3`}>
 								{gitStats.months?.map((month, monthIndex) => (
 									<div
 										key={monthIndex}
