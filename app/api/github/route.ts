@@ -31,33 +31,59 @@ interface ContributionDaysEntity {
 	date: string;
 }
 
+interface Week {
+	contributionDays: ContributionDaysEntity[];
+	weekStartDate: string;
+}
 interface MonthEntity {
 	month: string;
-	contributionDays: ContributionDaysEntity[];
+	weeks: Week[];
 }
 
 function convertWeeksToMonthWiseData(weeks: WeeksEntity[]): MonthEntity[] {
-	const monthWiseData: { [key: string]: ContributionDaysEntity[] } = {};
+	const monthWiseData: {
+		[key: string]: { [key: string]: ContributionDaysEntity[] };
+	} = {};
 
 	weeks.forEach(week => {
 		week.contributionDays &&
 			week.contributionDays.forEach(day => {
 				const date = new Date(day.date);
-				const month = date.toLocaleString("default", { month: "short" }); // Get "YYYY-MM" from the date string
+				const month = date.toLocaleString("default", {
+					month: "short",
+					year: "numeric",
+				});
+				const startOfWeek = new Date(
+					date.setDate(date.getDate() - date.getDay())
+				);
+				const weekStartDate = startOfWeek.toISOString().slice(0, 10);
 
 				if (!monthWiseData[month]) {
-					monthWiseData[month] = [];
+					monthWiseData[month] = {};
 				}
 
-				monthWiseData[month].push(day);
+				if (!monthWiseData[month][weekStartDate]) {
+					monthWiseData[month][weekStartDate] = [];
+				}
+
+				monthWiseData[month][weekStartDate].push(day);
 			});
 	});
 
 	// Convert the monthWiseData object to an array of MonthData objects
-	const monthArray: MonthEntity[] = Object.keys(monthWiseData).map(month => ({
-		month,
-		contributionDays: monthWiseData[month],
-	}));
+	const monthArray: MonthEntity[] = Object.keys(monthWiseData).map(month => {
+		const weeksArray: Week[] = Object.keys(monthWiseData[month]).map(
+			weekStartDate => ({
+				weekStartDate,
+				contributionDays: monthWiseData[month][weekStartDate],
+			})
+		);
+
+		return {
+			month,
+			weeks: weeksArray,
+		};
+	});
 
 	return monthArray;
 }

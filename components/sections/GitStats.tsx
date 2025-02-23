@@ -6,9 +6,13 @@ import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 import { Card } from "../ui/card";
 
+interface Week {
+	weekStartDate: string;
+	contributionDays: ContributionDaysEntity[];
+}
 interface MonthEntity {
 	month: string;
-	contributionDays: ContributionDaysEntity[];
+	weeks: Week[];
 }
 export interface IContributionCalendar {
 	totalContributions: number;
@@ -53,7 +57,7 @@ const GitStats = () => {
 		if (contributionLevel === "SECOND_QUARTILE") return "bg-[#40c463]";
 		if (contributionLevel === "THIRD_QUARTILE") return "bg-[#30a14e]";
 		if (contributionLevel === "FOURTH_QUARTILE") return "bg-[#216e39]";
-		return "bg-[#ebedf0]";
+		return "bg-muted-foreground/40";
 	};
 
 	if (loading)
@@ -84,50 +88,53 @@ const GitStats = () => {
 				<span className="text-primary">Github</span> Activity
 			</h2>
 			<div>
-				{gitStats && (
-					<div className="w-full space-y-4">
-						<div className="flex items-center gap-2">
-							<div className="rounded-full bg-primary/10 p-1">
-								<GitCommit />
-							</div>
-							{gitStats.totalContributions} contributions in the last year
+				<div className="w-full space-y-4">
+					<div className="flex items-center gap-2">
+						<div className="rounded-full bg-primary/10 p-1">
+							<GitCommit />
 						</div>
-						<ScrollArea className="rounded-md">
-							<div className={`flex justify-center bg-accent p-4 gap-2`}>
-								{/* {gitStats.weeks?.map((week, weekIndex: number) => (
-									<div
-										key={weekIndex}
-										className="flex flex-col"
-									>
-										<div
-											key={weekIndex}
-											className={`flex flex-col gap-2 h-full bg-accent ${
-												week.contributionDays &&
-												week.contributionDays[0].weekday === 0
-													? "justify-start"
-													: "justify-end"
-											}`}
-										>
-											{week.contributionDays &&
-												week.contributionDays.map((day, dayIndex: number) => (
+						{gitStats.totalContributions} contributions in the last year
+					</div>
+					<ScrollArea className="rounded-lg">
+						<div className={`flex justify-between bg-secondary/60 p-4 gap-[8]`}>
+							{gitStats.months?.map((month, monthIndex) => (
+								<div
+									key={monthIndex}
+									className="space-y-1"
+								>
+									<div className="flex gap-[2]">
+										{month.weeks.map((week, weekIndex) => (
+											<div
+												key={weekIndex}
+												className={`flex flex-col gap-[2] ${
+													week.weekStartDate === week.contributionDays[0].date
+														? "justify-start"
+														: "justify-end"
+												}`}
+											>
+												{week.contributionDays.map((day, dayIndex) => (
 													<div
 														key={dayIndex}
 														className={cn(
-															"w-[10] h-[10]",
+															"w-[10] h-[10] rounded-[3]",
 															getContributionLevel(day.contributionLevel)
 														)}
 													></div>
 												))}
-										</div>
-										{}
+											</div>
+										))}
 									</div>
-								))} */}
-							</div>
-							<ScrollBar orientation="horizontal" />
-						</ScrollArea>
-					</div>
-				)}
-				<pre>{JSON.stringify(gitStats, null, 4)}</pre>
+									{month.weeks.length > 2 && (
+										<p className="text-center text-sm font-light">
+											{month.month.slice(0, 3)}
+										</p>
+									)}
+								</div>
+							))}
+						</div>
+						<ScrollBar orientation="horizontal" />
+					</ScrollArea>
+				</div>
 			</div>
 		</section>
 	);
