@@ -16,6 +16,7 @@ interface MonthEntity {
 interface ISubmissionCalendar {
 	totalSubmissions: number;
 	maxSubmissionsInOneDay: number;
+	minSubmissionsInOneDay: number;
 	months?: MonthEntity[] | null;
 }
 
@@ -29,6 +30,7 @@ const processSubmissionCalendar = (submissionCalendar: {
 
 	let totalSubmissions = 0;
 	let maxSubmissionsInOneDay = 0;
+	let minSubmissionsInOneDay = 0;
 
 	for (let d = new Date(oneYearAgo); d <= today; d.setDate(d.getDate() + 1)) {
 		const dateString = d.toISOString().split("T")[0];
@@ -43,6 +45,7 @@ const processSubmissionCalendar = (submissionCalendar: {
 		filledCalendar[dateString] = submissionCount;
 		totalSubmissions += submissionCount;
 		maxSubmissionsInOneDay = Math.max(maxSubmissionsInOneDay, submissionCount);
+		minSubmissionsInOneDay = Math.min(minSubmissionsInOneDay, submissionCount);
 	}
 
 	const months: MonthEntity[] = [];
@@ -100,7 +103,7 @@ const processSubmissionCalendar = (submissionCalendar: {
 		months.push(currentMonth);
 	}
 
-	return { totalSubmissions, maxSubmissionsInOneDay, months };
+	return { totalSubmissions, maxSubmissionsInOneDay, minSubmissionsInOneDay, months };
 };
 
 export async function GET(req: NextRequest) {

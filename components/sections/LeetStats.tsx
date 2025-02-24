@@ -10,7 +10,7 @@ import {
 	TooltipProvider,
 	TooltipTrigger,
 	TooltipContent,
-} from "@radix-ui/react-tooltip";
+} from "../ui/tooltip";
 
 interface SubmissionDaysEntity {
 	submissionCount: number;
@@ -28,6 +28,7 @@ interface MonthEntity {
 interface ISubmissionCalendar {
 	totalSubmissions: number;
 	maxSubmissionsInOneDay: number;
+	minSubmissionsInOneDay: number;
 	months?: MonthEntity[] | null;
 }
 
@@ -58,13 +59,14 @@ const LeetStats = () => {
 
 	const getSubmissionLevel = (submissionCount: number) => {
 		if (!leetStats || submissionCount === 0) return "bg-muted-foreground/40";
-		const percentage =
-			(submissionCount * 100) / leetStats.maxSubmissionsInOneDay;
-		if (percentage <= 20) return "bg-[#9be9a8]";
-		if (percentage <= 40) return "bg-[#40c463]";
-		if (percentage <= 60) return "bg-[#30a14e]";
-		if (percentage <= 80) return "bg-[#216e39]";
-		return "bg-primary";
+		const { maxSubmissionsInOneDay: maxSub, minSubmissionsInOneDay: minSub } =
+			leetStats;
+		const percentage = (submissionCount * 100) / (maxSub - minSub);
+		if (percentage <= 20) return "bg-green-300 dark:bg-green-700";
+		if (percentage <= 40) return "bg-green-400 dark:bg-green-600";
+		if (percentage <= 60) return "bg-green-500 dark:bg-green-500";
+		if (percentage <= 80) return "bg-green-600 dark:bg-green-400";
+		return "bg-green-700 dark:bg-green-300";
 	};
 
 	if (loading)
@@ -100,7 +102,7 @@ const LeetStats = () => {
 						<div className="rounded-full bg-primary/10 p-1">
 							<GitCommit />
 						</div>
-						{leetStats.totalSubmissions} contributions in the last year
+						{leetStats.totalSubmissions} submissions in the last year
 					</div>
 					<div className="bg-secondary/60 py-3 px-6 w-full rounded-lg">
 						<ScrollArea className="rounded-lg">
@@ -139,8 +141,8 @@ const LeetStats = () => {
 																		? day.submissionCount
 																		: "No"}{" "}
 																	{day.submissionCount === 1
-																		? "contribution"
-																		: "contributions"}{" "}
+																		? "submission"
+																		: "submissions"}{" "}
 																	on{" "}
 																	{new Date(day.date).toLocaleString(
 																		"default",

@@ -56,10 +56,10 @@ const GitStats = () => {
 	}, []);
 
 	const getContributionLevel = (contributionLevel: string) => {
-		if (contributionLevel === "FIRST_QUARTILE") return "bg-[#9be9a8]";
-		if (contributionLevel === "SECOND_QUARTILE") return "bg-[#40c463]";
-		if (contributionLevel === "THIRD_QUARTILE") return "bg-[#30a14e]";
-		if (contributionLevel === "FOURTH_QUARTILE") return "bg-[#216e39]";
+		if (contributionLevel === "FIRST_QUARTILE") return "bg-[#9be9a8] dark:bg-[#216e39]";
+		if (contributionLevel === "SECOND_QUARTILE") return "bg-[#40c463] dark:bg-[#30a14e]";
+		if (contributionLevel === "THIRD_QUARTILE") return "bg-[#30a14e] dark:bg-[#40c463]";
+		if (contributionLevel === "FOURTH_QUARTILE") return "bg-[#216e39] dark:bg-[#9be9a8]";
 		return "bg-muted-foreground/40";
 	};
 
