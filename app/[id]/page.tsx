@@ -7,6 +7,7 @@ import Skills from "@/components/sections/Skills";
 import { useParams } from "next/navigation";
 import React from "react";
 import GitStats from "../../components/sections/GitStats";
+import LeetStats from "@/components/sections/LeetStats";
 
 const page = () => {
 	const { id } = useParams();
@@ -18,6 +19,7 @@ const page = () => {
 			<Projects />
 			<Education />
 			<GitStats />
+			<LeetStats />
 		</div>
 	);
 };
