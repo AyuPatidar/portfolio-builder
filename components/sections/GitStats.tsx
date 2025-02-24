@@ -20,14 +20,11 @@ interface MonthEntity {
 	month: string;
 	weeks: Week[];
 }
-export interface IContributionCalendar {
+interface IContributionCalendar {
 	totalContributions: number;
 	months?: MonthEntity[] | null;
 }
-export interface WeeksEntity {
-	contributionDays?: ContributionDaysEntity[] | null;
-}
-export interface ContributionDaysEntity {
+interface ContributionDaysEntity {
 	contributionLevel: string;
 	contributionCount: number;
 	weekday: number;

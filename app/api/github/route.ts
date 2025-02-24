@@ -128,7 +128,7 @@ export async function GET(req: NextRequest) {
 		return NextResponse.json({
 			totalContributions: totalContributions,
 			months: monthWiseData,
-		});
+		}, {status: 200});
 	} catch (error) {
 		console.error("Fetch Github contributions Error: ", error);
 		return NextResponse.json(
