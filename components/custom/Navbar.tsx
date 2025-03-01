@@ -42,7 +42,7 @@ const Navbar = () => {
 			<div className="container mx-auto px-4">
 				<div className="flex items-center justify-between h-16">
 					{/* left part */}
-					<Link href={"/"}>
+					<Link href={"/ayushpatidar755"}>
 						<div className="flex items-center gap-4">
 							<div className="w-10 h-10 rounded-full overflow-hidden">
 								{session?.user?.image ? (
