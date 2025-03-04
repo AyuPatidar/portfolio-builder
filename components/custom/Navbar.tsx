@@ -9,8 +9,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "../ui/button";
 import { Download, Menu, X } from "lucide-react";
 import { Skeleton } from "../ui/skeleton";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+	const pathname = usePathname();
 	const { data: session } = useSession();
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [isScrolled, setIsScrolled] = useState(false);
@@ -68,7 +70,7 @@ const Navbar = () => {
 
 					<div className="flex items-center gap-2 lg:gap-6">
 						{/* Desktop Menu */}
-						<nav className="hidden lg:flex items-center gap-6">
+						{pathname === '/ayushpatidar755' && <nav className="hidden lg:flex items-center gap-6">
 							{navLinks.map(link => (
 								<Link
 									href={link.href}
@@ -92,16 +94,16 @@ const Navbar = () => {
 									Resume
 								</Button>
 							</Link>
-						</nav>
+						</nav>}
 						{/* Mobile Menu */}
-						<Button
+						{pathname === '/ayushpatidar755' && <Button
 							variant={"ghost"}
 							size={"icon"}
 							className="lg:hidden [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0"
 							onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 						>
 							{isMobileMenuOpen ? <X /> : <Menu />}
-						</Button>
+						</Button>}
 						<div>
 							<ThemeButton />
 						</div>
@@ -110,7 +112,7 @@ const Navbar = () => {
 			</div>
 
 			{/* Mobile Menu Animations */}
-			<AnimatePresence>
+			{pathname === '/ayushpatidar755' && <AnimatePresence>
 				{isMobileMenuOpen && (
 					<motion.div
 						initial={{ opacity: 0, y: -20, height: 0, scaleY: 0.5 }}
@@ -147,7 +149,7 @@ const Navbar = () => {
 						</nav>
 					</motion.div>
 				)}
-			</AnimatePresence>
+			</AnimatePresence>}
 		</header>
 	);
 };
