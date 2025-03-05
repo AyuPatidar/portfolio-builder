@@ -12,7 +12,6 @@ body {
 
 @layer base {
 	:root {
-		--font-color: 0 0% 100%;
 		--background: 0 0% 100%;
 		--foreground: 240 10% 3.9%;
 		--card: 0 0% 100%;
@@ -41,7 +40,6 @@ body {
 	}
 
 	.dark {
-		--font-color: 179 100% 0%;
 		--background: 20 14.3% 4.1%;
 		--foreground: 0 0% 95%;
 		--card: 24 9.8% 10%;

@@ -25,23 +25,21 @@ const page = () => {
 
 	return (
 		<div>
-			<div>
-				<Hero />
-				<Skills />
-				<Experience />
-				<Projects />
-				<Education />
-				{/* <GitStats /> */}
-				<Footer />
-			</div>
+			<Hero />
+			<Skills />
+			<Experience />
+			<Projects />
+			<Education />
+			{/* <GitStats /> */}
+			<Footer />
 			<div className="fixed bottom-10 right-10">
 				<Button
 					type="button"
 					onClick={() => router.push(`/${id}/forms`)}
 					variant={"ghost"}
-					className="flex items-center justify-center bg-secondary-foreground rounded-full shadow-lg w-16 h-16 [&_svg]:pointer-events-none [&_svg]:size-8 [&_svg]:shrink-0"
+					className="flex items-center justify-center bg-secondary-foreground hover:bg-opacity-100 rounded-full shadow-lg w-16 h-16 [&_svg]:pointer-events-none [&_svg]:size-8 [&_svg]:shrink-0"
 				>
-					<FaPencil className="text-fontColor" />
+					<FaPencil className="text-white dark:text-black" />
 				</Button>
 			</div>
 		</div>
