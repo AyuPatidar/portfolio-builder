@@ -13,7 +13,8 @@ export const tangerine = Tangerine({
 });
 
 export default function Home() {
-	const name = useSession().data?.user?.name;
+	const { data: session } = useSession();
+	const { name } = sessionStorage.user;
 	const showcase = ["Projects", "Skills", "Experience"];
 	return (
 		<div className="w-full h-screen">
