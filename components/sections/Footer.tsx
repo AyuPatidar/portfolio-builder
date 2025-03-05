@@ -9,7 +9,7 @@ const Footer = () => {
 			className="px-2 py-4 md:py-8 bg-foreground"
 		>
 			<div className="md:mx-28 flex flex-col md:flex-row-reverse items-center gap-2 justify-between">
-				<h5 className="text-2xl text-white dark:text-black opacity-100 font-bold">
+				<h5 className="text-2xl text-fontColor opacity-100 font-bold">
 					Designed by Ayush Patidar
 				</h5>
 				<div className="flex gap-8">

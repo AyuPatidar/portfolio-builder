@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react";
 import GitStats from "../../components/sections/GitStats";
 import Footer from "@/components/sections/Footer";
 import Link from "next/link";
-import { FaUserEdit } from "react-icons/fa";
+import { FaPencil } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 
 const page = () => {
@@ -39,9 +39,9 @@ const page = () => {
 					type="button"
 					onClick={() => router.push(`/${id}/forms`)}
 					variant={"ghost"}
-					className="flex items-center justify-center bg-secondary rounded-full shadow-lg w-16 h-16 [&_svg]:pointer-events-none [&_svg]:size-6 [&_svg]:shrink-0"
+					className="flex items-center justify-center bg-secondary-foreground rounded-full shadow-lg w-16 h-16 [&_svg]:pointer-events-none [&_svg]:size-8 [&_svg]:shrink-0"
 				>
-					<FaUserEdit />
+					<FaPencil className="text-fontColor" />
 				</Button>
 			</div>
 		</div>

@@ -37,7 +37,7 @@ const Projects = () => {
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.5, delay: index * 0.1 }}
 					>
-						<Card className="group overflow-hidden border-border/5 bg-card hover:shadow-xl transition-all duration-300">
+						<Card className="group overflow-hidden border-border/5 bg-card hover:shadow-xl">
 							<div className="relative overflow-hidden aspect-video">
 								<Image
 									src={project.image}
