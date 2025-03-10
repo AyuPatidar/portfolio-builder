@@ -12,6 +12,7 @@ import Link from "next/link";
 import { FaPencil } from "react-icons/fa6";
 import { Button } from "@/components/ui/button";
 import { useSession } from "next-auth/react";
+import Navbar from "@/components/custom/Navbar";
 
 const page = () => {
 	const params = useParams();
@@ -28,6 +29,7 @@ const page = () => {
 
 	return (
 		<div>
+			<Navbar />
 			<Hero />
 			<Skills />
 			<Experience />
