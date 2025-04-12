@@ -2,10 +2,10 @@
 import { useSession } from "next-auth/react";
 import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/custom/sidebar/app-sidebar";
+import Navbar from "@/components/custom/Navbar";
+import Form from "@/components/custom/Form";
 
-const page = ({ children }: { children: React.ReactNode }) => {
+const page = () => {
 	const params = useParams();
 	const router = useRouter();
 	const { data: session, status } = useSession();
@@ -13,9 +13,7 @@ const page = ({ children }: { children: React.ReactNode }) => {
 	const [id, setId] = useState<string | null>(null);
 
 	useEffect(() => {
-		if (params?.id) {
-			setId(params.id as string);
-		}
+		if (params?.id) setId(params.id as string);
 	}, [params]);
 
 	useEffect(() => {
@@ -38,15 +36,10 @@ const page = ({ children }: { children: React.ReactNode }) => {
 	return (
 		<>
 			{id && session?.user?.email?.startsWith(id) && (
-				<SidebarProvider>
-					<AppSidebar />
-					<main>
-						<section className="container mx-auto px-4 pt-16 pb-20">
-							<SidebarTrigger />
-							{children}
-						</section>
-					</main>
-				</SidebarProvider>
+				<div>
+					<Navbar />
+					<Form />
+				</div>
 			)}
 		</>
 	);
