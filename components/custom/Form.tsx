@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "../ui/textarea";
+import * as icons from "simple-icons";
 
 // define form schema
 const FormSchema = z.object({
@@ -38,6 +39,22 @@ const MyForm = () => {
 		},
 	});
 
+	const { control, handleSubmit, register, watch } = form;
+	const watchedSkills = watch("skills");
+
+	const findIconSvg = (skill: string) => {
+		if (!skill) return null;
+
+		const searchKey = `si${skill.trim().toLowerCase()}`;
+
+		for (const icon in icons) {
+			// @ts-ignore
+			if (icon.toLowerCase() === searchKey) return icons[icon].svg;
+		}
+
+		return null;
+	};
+
 	// handles the skills array of form
 	const {
 		fields: skills,
@@ -46,7 +63,7 @@ const MyForm = () => {
 	} = useFieldArray({
 		// @ts-ignore
 		name: "skills",
-		control: form.control,
+		control: control,
 	});
 
 	// handles form submission
@@ -67,11 +84,11 @@ const MyForm = () => {
 		<div className="w-full mx-auto flex justify-center container mt-32">
 			<Form {...form}>
 				<form
-					onSubmit={form.handleSubmit(onSubmit)}
+					onSubmit={handleSubmit(onSubmit)}
 					className="w-2/3 space-y-6"
 				>
 					<FormField
-						control={form.control}
+						control={control}
 						name={"welcomeText"}
 						render={({ field }) => (
 							<FormItem>
@@ -88,7 +105,7 @@ const MyForm = () => {
 						)}
 					/>
 					<FormField
-						control={form.control}
+						control={control}
 						name={"description"}
 						render={({ field }) => (
 							<FormItem>
@@ -109,33 +126,50 @@ const MyForm = () => {
 						)}
 					/>
 					<FormField
-						control={form.control}
+						control={control}
 						name="skills"
 						render={({ field }) => (
 							<FormItem>
-								<FormLabel>Skills</FormLabel>
+								<div className="flex justify-between">
+									<FormLabel>Skills</FormLabel>
+									<FormDescription>
+										Try different variations for input if icon doesn't appear
+									</FormDescription>
+								</div>
 								<div className="space-y-4">
-									{skills.map((skill, index) => (
-										<div
-											key={skill.id}
-											className="flex items-center space-x-4"
-										>
-											<FormControl>
-												<Input
-													placeholder="Skill"
-													className="border-2 border-primary"
-													{...form.register(`skills.${index}`)}
-												/>
-											</FormControl>
-											<Button
-												type="button"
-												variant={"destructive"}
-												onClick={() => removeSkill(index)}
+									{skills.map((skill, index) => {
+										const currentSkill = watchedSkills?.[index] || "";
+										const iconSvg = findIconSvg(currentSkill);
+										return (
+											<div
+												key={skill.id}
+												className="flex items-center gap-4"
 											>
-												Remove
-											</Button>
-										</div>
-									))}
+												<FormControl>
+													<Input
+														placeholder="Skill"
+														className="border-2 border-primary"
+														{...register(`skills.${index}`)}
+													/>
+												</FormControl>
+												{iconSvg && (
+													<div
+														className="w-12 fill-primary flex items-center justify-center"
+														dangerouslySetInnerHTML={{
+															__html: iconSvg,
+														}}
+													></div>
+												)}
+												<Button
+													type="button"
+													variant={"destructive"}
+													onClick={() => removeSkill(index)}
+												>
+													Remove
+												</Button>
+											</div>
+										);
+									})}
 								</div>
 								<Button
 									type="button"
