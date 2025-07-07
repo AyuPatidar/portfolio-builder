@@ -44,14 +44,11 @@ const MyForm = () => {
 
 	const findIconSvg = (skill: string) => {
 		if (!skill) return null;
-
 		const searchKey = `si${skill.trim().toLowerCase()}`;
-
 		for (const icon in icons) {
 			// @ts-ignore
 			if (icon.toLowerCase() === searchKey) return icons[icon].svg;
 		}
-
 		return null;
 	};
 
@@ -87,6 +84,7 @@ const MyForm = () => {
 					onSubmit={handleSubmit(onSubmit)}
 					className="w-2/3 space-y-6"
 				>
+					{/* Welcome text */}
 					<FormField
 						control={control}
 						name={"welcomeText"}
@@ -104,6 +102,8 @@ const MyForm = () => {
 							</FormItem>
 						)}
 					/>
+
+					{/* Description Text */}
 					<FormField
 						control={control}
 						name={"description"}
@@ -125,13 +125,15 @@ const MyForm = () => {
 							</FormItem>
 						)}
 					/>
+
+					{/* Skills */}
 					<FormField
 						control={control}
 						name="skills"
-						render={({ field }) => (
+						render={({}) => (
 							<FormItem>
 								<div className="flex justify-between">
-									<FormLabel>Skills</FormLabel>
+									<FormLabel>Skills & Technologies</FormLabel>
 									<FormDescription>
 										Try different variations for input if icon doesn't appear
 									</FormDescription>
