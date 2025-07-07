@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useFieldArray, useForm } from "react-hook-form";
+import { Controller, useFieldArray, useForm } from "react-hook-form";
 import {
 	Form,
 	FormControl,
@@ -16,6 +16,21 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Textarea } from "../ui/textarea";
 import * as icons from "simple-icons";
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList,
+} from "@/components/ui/command";
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { ChevronsUpDown, Check } from "lucide-react";
 
 // define form schema
 const FormSchema = z.object({
@@ -25,11 +40,17 @@ const FormSchema = z.object({
 		.max(40, { message: "Welcome text can be at max 40 char long." }),
 	description: z.string().min(1, { message: "Description is required." }),
 	skills: z
-		.array(z.string().min(1, { message: "Skill is required." }))
-		.min(1, { message: "Atleast 1 skill is required." }),
+		.array(z.string().min(1, { message: "Skill must be non-empty." }))
+		.min(1, { message: "At least 1 skill is required." })
+		.refine(skills => skills.every(skill => skill.trim().length > 0), {
+			message: "All skills must be non-empty.",
+		}),
 });
 
 const MyForm = () => {
+	const [iconNames, setIconNames] = useState<string[]>([]);
+	const [popoverOpenStates, setPopoverOpenStates] = useState<boolean[]>([]);
+
 	const form = useForm<z.infer<typeof FormSchema>>({
 		resolver: zodResolver(FormSchema),
 		defaultValues: {
@@ -42,12 +63,26 @@ const MyForm = () => {
 	const { control, handleSubmit, register, watch } = form;
 	const watchedSkills = watch("skills");
 
+	useEffect(() => {
+		const names: string[] = [];
+		for (const icon in icons) {
+			names.push((icons as any)[icon].slug);
+		}
+		setIconNames(names);
+		setPopoverOpenStates(
+			new Array(form.getValues("skills").length).fill(false)
+		);
+	}, []);
+
+	useEffect(() => {
+		setPopoverOpenStates(new Array(watchedSkills.length).fill(false));
+	}, [watchedSkills.length]);
+
 	const findIconSvg = (skill: string) => {
 		if (!skill) return null;
 		const searchKey = `si${skill.trim().toLowerCase()}`;
 		for (const icon in icons) {
-			// @ts-ignore
-			if (icon.toLowerCase() === searchKey) return icons[icon].svg;
+			if (icon.toLowerCase() === searchKey) return (icons as any)[icon].svg;
 		}
 		return null;
 	};
@@ -148,10 +183,84 @@ const MyForm = () => {
 												className="flex items-center gap-4"
 											>
 												<FormControl>
-													<Input
-														placeholder="Skill"
-														className="border-2 border-primary"
-														{...register(`skills.${index}`)}
+													<Controller
+														control={control}
+														name={`skills.${index}`}
+														render={({ field }) => (
+															<Popover
+																open={popoverOpenStates[index]}
+																onOpenChange={isOpen => {
+																	const newOpenStates = [...popoverOpenStates];
+																	newOpenStates[index] = isOpen;
+																	setPopoverOpenStates(newOpenStates);
+																}}
+															>
+																<PopoverTrigger
+																	asChild
+																	className="w-full"
+																>
+																	<Button
+																		variant="outline"
+																		role="combobox"
+																		className="justify-between"
+																	>
+																		{field.value
+																			? field.value
+																			: "Select skill..."}
+																		<ChevronsUpDown className="opacity-50" />
+																	</Button>
+																</PopoverTrigger>
+																<PopoverContent className="w- p-0">
+																	{/* @ts-ignore */}
+																	<Command>
+																		<CommandInput
+																			// @ts-ignore
+																			placeholder="Search skill..."
+																			className="h-9"
+																		/>
+																		{/* @ts-ignore */}
+																		<CommandList>
+																			{/* @ts-ignore */}
+																			<CommandEmpty>
+																				No skill found.
+																			</CommandEmpty>
+																			{/* @ts-ignore */}
+																			<CommandGroup>
+																				{iconNames.map(iconName => (
+																					// @ts-ignore
+																					<CommandItem
+																						key={iconName}
+																						value={iconName}
+																						onSelect={(
+																							currentValue: string
+																						) => {
+																							field.onChange(currentValue);
+																							const newOpenStates = [
+																								...popoverOpenStates,
+																							];
+																							newOpenStates[index] = false;
+																							setPopoverOpenStates(
+																								newOpenStates
+																							);
+																						}}
+																					>
+																						{iconName}
+																						<Check
+																							className={cn(
+																								"ml-auto",
+																								field.value === iconName
+																									? "opacity-100"
+																									: "opacity-0"
+																							)}
+																						/>
+																					</CommandItem>
+																				))}
+																			</CommandGroup>
+																		</CommandList>
+																	</Command>
+																</PopoverContent>
+															</Popover>
+														)}
 													/>
 												</FormControl>
 												{iconSvg && (
